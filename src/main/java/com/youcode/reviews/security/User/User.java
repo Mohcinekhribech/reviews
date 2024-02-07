@@ -1,6 +1,7 @@
 package com.youcode.reviews.security.User;
 
 
+import com.youcode.reviews.app.entities.Review;
 import com.youcode.reviews.security.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,9 @@ public class User  implements UserDetails {
     protected Role role;
     @OneToMany(mappedBy = "user")
     protected List<Token> tokens;
+
+    @OneToMany(mappedBy = "user")
+    protected List<Review> reviews;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.role.name()));
